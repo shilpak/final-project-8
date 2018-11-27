@@ -1,0 +1,50 @@
+.App {
+    text-align: center;
+    height: 100vh;
+    width: 75vh;
+    display: flex;
+}
+
+.sideBar {
+    width: 25vh;
+    background: lightgreen;
+}
+
+
+#searchBox {
+    width: 20vw;
+    height: 2rem;
+    font-size: 1rem;
+    padding: .5rem;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+#map {
+    height: 100vh;
+    width: 75vw;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.imageDisplay {
+    display: block;
+    margin: auto;
+    background-color: brown;
+    margin: 0px;
+}
+
+.venueList {
+    padding: 1rem;
+    list-style: none;
+
+}
+
+.list {
+    list-style: none;
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: .5rem;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
