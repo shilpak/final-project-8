@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList';
-import '../App.css';
+import './App.css';
 
 export default class SideBar extends Component {
 
@@ -9,9 +9,9 @@ export default class SideBar extends Component {
             <div className='sideBar'>
                     <input type="text" id="searchBox" placeholder="Search Box" aria-labelledby="search"/>
                     <VenueList {...this.props} 
-                    
+                     handleListItemClick={this.props.handleListItemClick}
                     />
-               </div>
+             </div>
         );
     }
 }

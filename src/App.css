@@ -1,29 +1,23 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+}
+
 .App {
     text-align: center;
     height: 100vh;
-    width: 75vh;
+    /* width: 75vh; */
     display: flex;
-}
-
-.sideBar {
-    width: 25vh;
-    background: lightgreen;
-}
-
-
-#searchBox {
-    width: 20vw;
-    height: 2rem;
-    font-size: 1rem;
-    padding: .5rem;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    flex-direction: row;
 }
 
 #map {
     height: 100vh;
     width: 75vw;
-    display: flex;
-    flex-direction: row;
+    /* display: flex; */
+    /* flex-direction: row; */
 
 }
 
@@ -34,17 +28,40 @@
     margin: 0px;
 }
 
-.venueList {
-    padding: 1rem;
-    list-style: none;
+.sideBar {
+    max-height: 100vh;
+    width: 25vw;
+    background: #99ff66;
+    overflow: hidden;
+}
 
+
+#searchBox {
+     width: 90%;
+     margin: 0 auto;
+     height: 2rem;
+     font-size: 1rem;
+     padding: .5rem;
+     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.venueList {
+     height: calc(100% - 3rem);
+     padding: 1rem;
+     list-style: none;
+     overflow: scroll;
+     padding-right: 17px;
+     box-sizing: border-box;
+     width: calc(100% + 50px);
 }
 
 .list {
-    list-style: none;
-    font-size: 1rem;
-    margin-top: 1rem;
-    padding: .5rem;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    background: #fff;
+     list-style: none;
+     font-size: 1.2rem;
+     margin-top: 1rem;
+     margin-right: 2rem;
+     padding: .5rem;
+     cursor: pointer;
+     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }

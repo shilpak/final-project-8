@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './App.css';
 
 export default class ListItems extends Component {
 
@@ -7,7 +7,7 @@ export default class ListItems extends Component {
         return (
             <li className='list'
             aria-labelledby={this.props.name}
-            onClick={() => this.props.handleListItemClick(this.props)}
+            onClick={() => this.props.handleListItemClick(this.props.name)}
             >
           <p> {this.props.name} </p>
       </li>

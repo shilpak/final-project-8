@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListItems from './ListItems';
-import '../App.css';
+import './App.css';
 
 export default class VenueList extends Component {
 
@@ -9,7 +9,11 @@ export default class VenueList extends Component {
             <ul className="venueList">
 			{this.props.sites &&
 				this.props.sites.map((site, idx) => (
-					<ListItems key={idx} {...site} />
+					<ListItems 
+					key={idx} 
+					{...site}
+					handleListItemClick={this.props.handleListItemClick} 
+					/>
 					))}
 			</ul>
         );

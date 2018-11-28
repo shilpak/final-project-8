@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import SideBar from './components/SideBar';
+import SideBar from './SideBar';
 import './App.css';
 
 class App extends Component {
@@ -64,40 +64,23 @@ class App extends Component {
 
     }
 
-    handleMarkerClick = (marker) => {
-    //close any markers open
-    this.closeAllMarkers();
-    marker.isOpen = true;
-    this.setState({markers: Object.assign(this.state.markers,marker)})
-    // venue is venue that venue.id === marker.id
-    const venue = this.state.sites.find(favCoffeeSite => favCoffeeSite.id === marker.id);
-    // use squareApi to get venue details using marker.id as the id for the venue.
-    
-  };
-
-  handleListItemClick = (favCoffeeSite) => {
-    const marker = this.state.markers.find(marker => marker.id === favCoffeeSite.id);
-    this.handleMarkerClick(marker);
-    console.log(favCoffeeSite);
-  };
 
     //https://developers.google.com/maps/documentation/javascript/tutorial
     //lat and long of georgia state
     initMap = () => {
         const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: { lat: 33.247875, lng: -83.441162 },
+            center: {lat: 33.247875, lng: -83.441162},
             zoom: 5
         })
+
         //info window
         const infowindow = new window.google.maps.InfoWindow()
 
         //loop over each site present in the sites array we have run a foreach/map
         this.state.sites.forEach(favCoffeeSite => {
             const content = '<div id="contentBox">' +
-                '<img class="imageDisplay" src="' + favCoffeeSite.categories[0].icon.prefix + '32' + favCoffeeSite.categories[0].icon.suffix + '"/>' +
+                '<img class="imageDisplay" src="' + favCoffeeSite.categories[0].icon.prefix +'32'+ favCoffeeSite.categories[0].icon.suffix + '"/>' +
                 '<p><b>' + favCoffeeSite.name + '</b></p><p>' + favCoffeeSite.location.address + '</p></div>';
-
-
 
             var marker = new window.google.maps.Marker({
                 position: { lat: favCoffeeSite.location.lat, lng: favCoffeeSite.location.lng },
@@ -114,17 +97,32 @@ class App extends Component {
         })
     }
 
+        handleMarkerClick = (marker) => {
+        //close any markers open
+        this.closeAllMarkers();
+        marker.isOpen = true;
+        this.setState({ markers: Object.assign(this.state.markers, marker) })
+        // venue is venue that venue.id === marker.id
+        const venue = this.state.sites.find(favCoffeeSite => favCoffeeSite.id === marker.id);
+        console.log(venue);
+    };
+
+    handleListItemClick = (name) => {
+        const marker = this.state.markers.find(marker => marker.id === favCoffeeSite.id);
+        this.handleMarkerClick(marker);
+        console.log(name);
+    };
+
 
     render() {
         return (
             <main className="App">
-			<SideBar
-			{...this.state} 
-			handleListItemClick={this.handleListItemClick} />
-			<div id="map">
-			
-			</div>
-			</main>
+            <SideBar
+            {...this.state} 
+            handleListItemClick={this.handleListItemClick} />
+            <div id="map">
+            </div>
+            </main>
         )
     }
 }
