@@ -55,7 +55,7 @@ class App extends Component {
             })
     }
 
-    //check for the marker default behaviour
+    //check for the marker default behaviour  
     closeAllMarkers = () => {
         const markers = this.state.markers.map(marker => {
             marker.isOpen = false;
@@ -64,22 +64,40 @@ class App extends Component {
 
     }
 
+    handleMarkerClick = (marker) => {
+        //close any markers open
+        this.closeAllMarkers();
+        marker.isOpen = true;
+        this.setState({ markers: Object.assign(this.state.markers, marker) })
+        // venue is venue that venue.id === marker.id
+        const venue = this.state.sites.find(favCoffeeSite => favCoffeeSite.id === marker.id);
+        axios.getVenueDetails(marker.id)
+
+
+    };
+
+    // handleListItemClick = (name) => {
+    //     const marker = this.state.markers.find(marker => marker.id === favCoffeeSite.id);
+    //     this.handleMarkerClick(marker);
+    //     console.log(name);
+    // };
+
 
     //https://developers.google.com/maps/documentation/javascript/tutorial
     //lat and long of georgia state
     initMap = () => {
         const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: {lat: 33.247875, lng: -83.441162},
+            center: { lat: 33.247875, lng: -83.441162 },
             zoom: 5
         })
 
         //info window
         const infowindow = new window.google.maps.InfoWindow()
-
+        const markersArr = [];
         //loop over each site present in the sites array we have run a foreach/map
         this.state.sites.forEach(favCoffeeSite => {
             const content = '<div id="contentBox">' +
-                '<img class="imageDisplay" src="' + favCoffeeSite.categories[0].icon.prefix +'32'+ favCoffeeSite.categories[0].icon.suffix + '"/>' +
+                '<img class="imageDisplay" src="' + favCoffeeSite.categories[0].icon.prefix + '32' + favCoffeeSite.categories[0].icon.suffix + '"/>' +
                 '<p><b>' + favCoffeeSite.name + '</b></p><p>' + favCoffeeSite.location.address + '</p></div>';
 
             var marker = new window.google.maps.Marker({
@@ -87,32 +105,18 @@ class App extends Component {
                 map: map,
                 title: favCoffeeSite.name,
                 id: favCoffeeSite.id
-            })
+            });
+            markersArr.push(marker);
             //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
             marker.addListener('click', function() {
                 infowindow.setContent(content)
-                console.log(marker.id);
+                //console.log(marker.id);
                 infowindow.open(map, marker)
             })
         })
+        console.log(markersArr);
+        this.setState({ markers: markersArr });
     }
-
-        handleMarkerClick = (marker) => {
-        //close any markers open
-        this.closeAllMarkers();
-        marker.isOpen = true;
-        this.setState({ markers: Object.assign(this.state.markers, marker) })
-        // venue is venue that venue.id === marker.id
-        const venue = this.state.sites.find(favCoffeeSite => favCoffeeSite.id === marker.id);
-        console.log(venue);
-    };
-
-    handleListItemClick = (name) => {
-        const marker = this.state.markers.find(marker => marker.id === favCoffeeSite.id);
-        this.handleMarkerClick(marker);
-        console.log(name);
-    };
-
 
     render() {
         return (
